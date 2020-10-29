@@ -4,6 +4,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "outDir": "build",
-    "target": "es6"
-  }
+    "target": "es6",
+  },
+  "include": ["src"]
 }
