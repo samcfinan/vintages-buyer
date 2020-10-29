@@ -4,14 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "cypress": "node_modules/.bin/cypress open",
+    "start": "ts-node ./index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^5.5.0",
+    "@types/js-yaml": "^3.12.5",
+    "@types/node": "^14.14.6",
     "prettier": "^2.1.2",
+    "ts-node": "^9.0.0",
     "typescript": "^4.0.5"
+  },
+  "dependencies": {
+    "js-yaml": "^3.14.0",
+    "playwright": "^1.5.2"
   }
 }

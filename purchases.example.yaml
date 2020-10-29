@@ -1,0 +1,7 @@
+special_offer_url:
+purchases:
+  - id: 12354
+payment:
+  credit_card_num: 4141909023421234
+  credit_card_cvv: 231
+  credit_card_exp: 03/14
