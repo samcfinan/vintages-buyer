@@ -1,13 +1,19 @@
 special_offer_url:
   user:
-    email: samcfinan@gmail.com
-    password: 5j5UcdAuNCkz
+    email: email@domain.com
+    password: <password>
   purchases:
     - id: 14790
       quantity: 2
     - id: 383695
       quantity: 3
+  # Look up store ID from Ship To Favourites under Account page
+  store_id: 511
+  # If the flag below is set to true, the bot will place the order for you.
+  # If not, you will have to click "Submit Order" yourself.
+  complete_purchase: false
   payment:
+    cardholder_name: Johnny Appeseed
     # Do not include spaces
     card_num: 4141909023421234
     # ex. 231
@@ -17,5 +23,4 @@ special_offer_url:
     # YY
     card_exp_year: 22
     # 'Visa' | 'MasterCard' | 'American Express'
-    card_type:
-  
+    card_type: Visa
