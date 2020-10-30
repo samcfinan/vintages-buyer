@@ -1,6 +1,6 @@
 # Vintages Buyer
 
-An automated script to quickly buy wine from the [LCBO Vintages Shop](http://www.vintagesshoponline.com) when new products are released.
+An automated script to quickly buy wine from the [LCBO Vintages Shop](http://www.vintagesshoponline.com) when new products are released. Driven by [Playwright](https://github.com/microsoft/playwright).
 
 Note: the demo video below is playing at 0.25x speed.
 ![Demo Video](https://storage.googleapis.com/assets-samcfinan/wine-buyer-demo.gif)
