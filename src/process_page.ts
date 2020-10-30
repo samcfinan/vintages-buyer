@@ -4,6 +4,8 @@ import { Page } from 'playwright'
 export const ProcessPage = async (page: Page, purchaseMap: PurchaseMap) => {
   const tableRows = await page.$$('tbody > tr')
 
+  let numAdded = 0
+
   for (const row of tableRows) {
     const rowData = await row.$$('td')
     // Skip table rows
@@ -29,7 +31,10 @@ export const ProcessPage = async (page: Page, purchaseMap: PurchaseMap) => {
 
     const quantityInput = await rowData[7].$('input')
     await quantityInput?.fill(purchaseData.quantity)
+    numAdded += 1
   }
 
-  await page.click('input[value="ADD TO CART"]')
+  if (numAdded > 0) {
+    await page.click('input[value="ADD TO CART"]')
+  }
 }

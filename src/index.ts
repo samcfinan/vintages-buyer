@@ -13,6 +13,7 @@ interface Config {
   }
   purchases: Wine[]
   store_id: number
+  complete_purchase: boolean
   payment: PaymentData
 }
 
@@ -47,6 +48,8 @@ const config = yaml.safeLoad(readFileSync('./config.yaml', 'utf-8')) as Config
 const baseURL = 'https://www.vintagesshoponline.com/vintages'
 
 async function main() {
+  const startTime = new Date()
+
   // Let's put these in a hashmap for performance and normalize the data
   const purchaseMap: PurchaseMap = {}
   config.purchases.map((wine) => {
@@ -68,17 +71,25 @@ async function main() {
 
   // Find latest collection, navigate after login
   const latestCollection = await page.$('text=October')
-  const link = await latestCollection?.getAttribute('href')
+  const firstPage = await latestCollection?.getAttribute('href')
 
   await Login(page, config.user)
 
-  await page.goto(`${baseURL}/${link}`!, { waitUntil: 'networkidle' })
+  await page.goto(`${baseURL}/${firstPage}`!, { waitUntil: 'networkidle' })
 
-  // const pages = await page.$$('#pagerlist > li > a')
-
+  const pages = await page.$$('#pagerlist > li > a')
   await ProcessPage(page, purchaseMap)
 
-  await Checkout(page, config.store_id, config.payment)
+  for (let i = 2; i <= pages.length; i++) {
+    await Promise.all([page.waitForTimeout(750), page.click(`#pagerlist > li > a[aria-label="Page ${i}"]`)])
+    await ProcessPage(page, purchaseMap)
+  }
+
+  await Checkout(page, config.store_id, config.payment, config.complete_purchase)
+
+  const finish = new Date().getTime() - startTime.getTime()
+  const runtime = new Date(finish).getMilliseconds() / 100
+  console.log('Runtime:', runtime)
 }
 
 main()
